@@ -22,7 +22,6 @@ RUN apt-get update -q && apt-get upgrade -yq \
 	&& apt-get install -yq \
 		libpng12-dev \
 		libjpeg-dev \
-    php5-mysql \
     libxml2-dev \
     mysql-client \
 		unzip \

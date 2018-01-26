@@ -31,20 +31,8 @@ RUN apt-get update -q && apt-get upgrade -yq \
 	&& docker-php-ext-install gd mysqli soap zip
 
 # Get Dolibarr
-ADD https://github.com/Dolibarr/dolibarr/archive/${DOLI_VERSION}.zip /tmp/dolibarr.zip
-RUN unzip -q /tmp/dolibarr.zip -d /tmp/dolibarr
-RUN cp -r /tmp/dolibarr/dolibarr-${DOLI_VERSION}/htdocs/* /var/www/html/ && ln -s /var/www/html /var/www/htdocs
-RUN cp -r /tmp/dolibarr/dolibarr-${DOLI_VERSION}/scripts /var/www/
-RUN rm -rf /tmp/dolibarr
+VOLUME /var/www/html/
 
 RUN chown -hR www-data:www-data /var/www/html
 
-
-
-VOLUME /var/www/html/conf
-VOLUME /var/www/html/documents
-
 EXPOSE 80
-
-COPY docker-run.sh /usr/local/bin/
-ENTRYPOINT ["docker-run.sh"]
